@@ -1,0 +1,13 @@
+#first-img {
+    width: 200px;
+}
+
+#second-img {
+    width: 400px;
+}
+
+body {text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: linear-gradient(to right, #808080, #1e1e1e);
+    color: black;
+}
