@@ -1,0 +1,28 @@
+h1 { text-align: center; }
+
+body {text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: linear-gradient(to right, pink, #AA336A);
+    color: black;
+}
+
+.div-img{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    padding-top:20%;
+}
+
+img{
+    transition: transform .2s;
+    width:300px;
+    height:300px;
+    margin:0 auto;
+    background-color: rgb(173, 173, 237);
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+img:hover{
+    transform:scale(1.5);
+}
