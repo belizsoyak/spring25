@@ -26,3 +26,18 @@ img{
 img:hover{
     transform:scale(1.5);
 }
+
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #ffb3b3;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #ff8080;
+}
