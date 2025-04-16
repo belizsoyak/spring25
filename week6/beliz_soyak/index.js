@@ -11,35 +11,33 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected');
-});
 
-server.listen(3000, () => {
-  console.log('listening on *:3000');
-});
+  socket.nickname = 'Anonymous';
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
+  socket.on('set nickname', (nick) => {
+    socket.nickname = nick;
+    io.emit('chat message', {
+      nick: 'System',
+      msg: `🟢 ${socket.nickname} has connected`
     });
   });
 
-io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-      console.log('message: ' + msg);
+  socket.on('chat message', ({ msg, nick }) => {
+    io.emit('chat message', { msg, nick });
+  });
+
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('chat message', {
+      nick: 'System',
+      msg: `🔴 ${socket.nickname} has disconnected`
     });
+  });
+  socket.on('typing', function(nick) {
+    socket.broadcast.emit('typing', nick);
+  });
+
 });
 
- io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' }); 
-
- io.on('connection', (socket) => {
-    socket.broadcast.emit('hi');
+server.listen(1000, () => {
+  console.log('listening on *:3000');
 });
-
-io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-      io.emit('chat message', msg);
-    });
-    });
-
-//tracking progress week 5 

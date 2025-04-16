@@ -17,6 +17,15 @@
   </head>
   <body>
     <ul id="messages"></ul>
+
+    <p id="typing" style="margin-left: 1rem; color: gray; font-style: italic;"></p>
+
+    <form id="nickname-form">
+      <input id="nickname" placeholder="Enter your nickname" autocomplete="off" />
+      <button>Set Nickname</button>
+    </form>
+
+
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
     </form>
@@ -24,25 +33,50 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
-    
       var messages = document.getElementById('messages');
       var form = document.getElementById('form');
       var input = document.getElementById('input');
+      var nicknameForm = document.getElementById('nickname-form');
+      var nicknameInput = document.getElementById('nickname');
+      var nickname = 'Anonymous';
+
+      nicknameForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (nicknameInput.value) {
+          nickname = nicknameInput.value;
+          socket.emit('set nickname', nickname);
+          nicknameForm.style.display = 'none';
+        }
+      });
     
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
-          socket.emit('chat message', input.value);
+          socket.emit('chat message', { msg: input.value, nick: nickname });
           input.value = '';
         }
       });
+
+      input.addEventListener('input', function() {
+        socket.emit('typing', nickname);
+      });
+
+      socket.on('typing', function(nick) {
+        const typingIndicator = document.getElementById('typing');
+        typingIndicator.textContent = `${nick} is typing...`;
+
+        clearTimeout(window.typingTimeout);
+        window.typingTimeout = setTimeout(() => {
+          typingIndicator.textContent = '';
+        }, 3000);
+      });
     
-      socket.on('chat message', function(msg) {
+      socket.on('chat message', function (data) {
         var item = document.createElement('li');
-        item.textContent = msg;
+        item.textContent = `${data.nick}: ${data.msg}`;
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
-      });
+     });
     </script>
 
   </body>
