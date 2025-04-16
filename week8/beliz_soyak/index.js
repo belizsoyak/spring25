@@ -25,7 +25,8 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  Message.find().sort({ timestamp: 1 }).limit(20).then((msgs) => {
+  Message.find().sort({ timestamp: -1 }).limit(20).then((msgs) => {
+    msgs.reverse();
     msgs.forEach((m) => {
       socket.emit('chat message', { nick: m.nick, msg: m.msg });
     });
@@ -73,6 +74,7 @@ app.get('/messages', async function(req, res) {
   res.json(await Message.find());
 });
 
-server.listen(3000, () => {
+server.listen(3000, async function(){
+  await mongoose.connect("mongodb+srv://sam:helloworld@cluster0.ytnrk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   console.log('listening on *:3000');
 });
