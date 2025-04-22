@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background-color: #f9f9f9;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.recommend-btn {
+  background-color: #803300;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.browse-btn {
+  background-color: #803300;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+}
+
+/* City Grid */
+.city-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.city-card {
+  width: 250px;
+  text-align: center;
+}
+
+.city-card img {
+  width: 100%;
+  border-radius: 8px;
+}
