@@ -3,8 +3,7 @@ import './index.css';
 import { useState } from 'react';
 import CitySelector from './components/CitySelector';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import CityGrid from './components/CityGrid';
+import Home from './components/Home';
 import SocialLinks from './components/SocialLinks';
 import CityShowcase from './components/CityShowcase';
 
@@ -15,9 +14,8 @@ function App() {
     <>
       <SocialLinks />
       <Header />
-      <Hero />
+      <Home />
       <CityShowcase />
-      <CityGrid />
 
     <div>
       <h1>Turkey Travel Hub</h1>
